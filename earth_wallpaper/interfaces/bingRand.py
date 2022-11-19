@@ -1,7 +1,6 @@
 from .utils.platformInfo import PlatformInfo
 from .utils.settings import Settings
 import requests
-import hashlib
 import json
 
 
@@ -31,14 +30,11 @@ class BingRand(object):
         }
         while True:
             img_url = self.get_img_url()
-            print(img_url, end=" ")
+            print(img_url)
             img = requests.get(img_url, headers=headers, proxies=self.proxies)
-            md5 = hashlib.md5(img.text.encode('utf-8')).hexdigest()
-            print(md5)
             # 检测无效数据
-            if md5 == "6d0b9d149a0c9a1da30920e84e5581a0":
+            if len(img.text)==1170:
                 print("数据无效，重新下载")
-                pass
             else:
                 return img.content
 
