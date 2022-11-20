@@ -29,6 +29,7 @@ setup(
         'PySide6',
         'requests',
         'dbus-python; platform_system == "Linux"',
+        'dbus-next; platform_system == "Linux"',
         'pywin32; platform_system == "Windows"'
     ]
 )
