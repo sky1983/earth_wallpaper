@@ -7,7 +7,7 @@ from .utils.wallpaper24Common import Wallpaper24Common
 class Wallpaper24Random(object):
     def __init__(self):
         self.wallpaperDir = Settings().wallpaper_dir()
-        self.ddwFile = randomDdw().getDdwFile(self.wallpaperDir)
+        self.ddwFile = randomDdw().get_ddw_file(self.wallpaperDir)
         self.executor = Wallpaper24Common(self.ddwFile)
         self.download_path = self.executor.download_path
 
