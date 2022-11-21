@@ -14,8 +14,8 @@ def find_first_json(dir_):
 
 
 class Wallpaper24Common(object):
-    def __init__(self, ddwFile):
-        self.wallpaperFile = ddwFile
+    def __init__(self, ddw_file):
+        self.wallpaperFile = ddw_file
         self.cache = PlatformInfo().download_dir()
         self.download_path = PlatformInfo().download_path(".png")
         self.unpackDir = self.cache + self.wallpaperFile.split("/")[-1].split(".")[0]

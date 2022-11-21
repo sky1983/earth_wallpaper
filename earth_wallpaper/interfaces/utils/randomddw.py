@@ -9,47 +9,52 @@ record = "ddwrecord.json"
 
 class RandomDdw(object):
 
-    def getDdwFile(self,ddwDir):
-        files = os.listdir(ddwDir)
+    def get_ddw_file(self, ddw_dir):
+        files = os.listdir(ddw_dir)
         files = list(filter(self.ddw_filter, files))
         today = datetime.date.today()
-        todayStr = today.strftime("%Y-%m-%d")
-        tempRecord = os.path.join(QStandardPaths.writableLocation(QStandardPaths.ConfigLocation),
-                                        "earth-wallpaper/") + record
-        if os.path.exists(tempRecord):
-            with open(tempRecord, 'r') as f:
-                recordJson = json.load(f)
-                print(recordJson['currentDDW'])
-                print(recordJson['recordDate'])
-                if todayStr == recordJson['recordDate']:
-                    return ddwDir + "/" + recordJson['currentDDW']
-                files = list(filter(lambda seq: self.ddw_filter_current(recordJson['currentDDW'],seq),files))
-                ddwFile = random.choice(files)
-                self.writeJson(tempRecord, ddwFile, todayStr)
-                return ddwDir + "/" + ddwFile
+        today_str = today.strftime("%Y-%m-%d")
+        temp_record = self.record_file_path()
+        if os.path.exists(temp_record):
+            with open(temp_record, 'r') as f:
+                record_json = json.load(f)
+                print(record_json['currentDDW'])
+                print(record_json['recordDate'])
+                if today_str == record_json['recordDate']:
+                    return ddw_dir + "/" + record_json['currentDDW']
+                files = list(filter(lambda seq: self.ddw_filter_current(record_json['currentDDW'], seq), files))
+                ddw_file = random.choice(files)
+                self.write_json(temp_record, ddw_file, today_str)
+                return ddw_dir + "/" + ddw_file
         else:
-            ddwFile = random.choice(files)
-            self.writeJson(tempRecord, ddwFile, todayStr)
-            return ddwDir + "/" + ddwFile
+            ddw_file = random.choice(files)
+            self.write_json(temp_record, ddw_file, today_str)
+            return ddw_dir + "/" + ddw_file
 
-    def writeJson(self,tempRecord,file,today):
-        print("当前文件位置：" + tempRecord)
-        recordJson = {"currentDDW": file, "recordDate": today}
-        jsondata = json.dumps(recordJson, indent=4, ensure_ascii=False)
-        f = open(tempRecord, 'w')
-        f.write(jsondata)
+    @staticmethod
+    def write_json(self, temp_record, file, today):
+        print("当前文件位置：" + temp_record)
+        record_json = {"currentDDW": file, "recordDate": today}
+        json_data = json.dumps(record_json, indent=4, ensure_ascii=False)
+        f = open(temp_record, 'w')
+        f.write(json_data)
         f.close()
 
-    def ddw_filter(self,f):
+    @staticmethod
+    def ddw_filter(self, f):
         if f[-4:] in ['.ddw']:
             return True
         else:
             return False
 
-
-    def ddw_filter_current(self,currentDDW, f):
-        if f == currentDDW:
+    @staticmethod
+    def ddw_filter_current(self, current_ddw, f):
+        if f == current_ddw:
             return False
         else:
             return True
 
+    @staticmethod
+    def record_file_path() -> str:
+        config = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
+        return os.path.join(config, 'earth-wallpaper/' + record)
