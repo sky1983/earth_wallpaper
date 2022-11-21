@@ -7,6 +7,7 @@ from .wallpaper24Random import Wallpaper24Random
 from .fengYun4 import FengYun4
 from .himawari8 import Himawari8
 from .DynamicWallpapers import DynamicWallpapers
+from .wallhaven import Wallhaven
 
 __all__ = [
     "Anime",
@@ -18,4 +19,5 @@ __all__ = [
     "FengYun4",
     "Himawari8",
     "DynamicWallpapers"
+    "Wallhaven"
 ]
