@@ -5,24 +5,26 @@ import datetime
 import random
 
 record = "ddwrecord.json"
+currentFile = "currentFile"
+recordDate = "recordDate"
 
 
 class RandomDdw(object):
 
-    def get_ddw_file(self, ddw_dir):
+    def get_ddw_file(self, ddw_dir, suffix):
         files = os.listdir(ddw_dir)
-        files = list(filter(self.ddw_filter, files))
+        files = list(filter(lambda file: self.ddw_filter(file, suffix), files))
         today = datetime.date.today()
         today_str = today.strftime("%Y-%m-%d")
         temp_record = self.record_file_path()
         if os.path.exists(temp_record):
             with open(temp_record, 'r') as f:
                 record_json = json.load(f)
-                print(record_json['currentDDW'])
-                print(record_json['recordDate'])
-                if today_str == record_json['recordDate']:
-                    return ddw_dir + "/" + record_json['currentDDW']
-                files = list(filter(lambda seq: self.ddw_filter_current(record_json['currentDDW'], seq), files))
+                print(record_json[currentFile])
+                print(record_json[recordDate])
+                if today_str == record_json[recordDate]:
+                    return ddw_dir + "/" + record_json[currentFile]
+                files = list(filter(lambda seq: self.ddw_filter_current(record_json[currentFile], seq), files))
                 ddw_file = random.choice(files)
                 self.write_json(temp_record, ddw_file, today_str)
                 return ddw_dir + "/" + ddw_file
@@ -32,17 +34,17 @@ class RandomDdw(object):
             return ddw_dir + "/" + ddw_file
 
     @staticmethod
-    def write_json(self, temp_record, file, today):
+    def write_json(temp_record, file, today):
         print("当前文件位置：" + temp_record)
-        record_json = {"currentDDW": file, "recordDate": today}
+        record_json = {currentFile: file, recordDate: today}
         json_data = json.dumps(record_json, indent=4, ensure_ascii=False)
         f = open(temp_record, 'w')
         f.write(json_data)
         f.close()
 
     @staticmethod
-    def ddw_filter(self, f):
-        if f[-4:] in ['.ddw']:
+    def ddw_filter(f, suffix):
+        if f[-4:] in [suffix]:
             return True
         else:
             return False
