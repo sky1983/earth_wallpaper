@@ -1,10 +1,28 @@
 name: Notify
-on: [issues, issue_comment, pull_request]
+on: 
+  issues:
+    types: opened
+  issue_comment:
+    types: created
+  pull_request_target:
+    types: opened
 jobs:
   notify:
     name: Notify
     runs-on: ubuntu-latest
     steps:
+      - name: get issue_comment content
+        if: github.event_name == 'issue_comment'
+        run: |
+            echo "CONTENT=${{ github.event.comment.body }}" >> $GITHUB_ENV
+      - name: get issues content
+        if: github.event_name == 'issues'
+        run: |
+          echo "CONTENT=${{ github.event.issue.title }}" >> $GITHUB_ENV
+      - name: get pull_request content
+        if: github.event_name == 'pull_request_target'
+        run: |
+          echo "CONTENT=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
       # 发送到Telegram
       - uses: colutius/Telegram-Msg@main
         with:
@@ -18,4 +36,8 @@ jobs:
 
             earth-wallpaper 仓库有新的动态。
             
+            发起者: ${{ github.event.sender.login }}
+            
             事件类型: ${{ github.event_name }}
+            
+            内容: ${{ env.CONTENT }}
