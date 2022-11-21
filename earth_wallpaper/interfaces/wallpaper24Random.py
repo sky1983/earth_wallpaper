@@ -3,11 +3,13 @@ from .utils.settings import Settings
 from .utils.randomddw import RandomDdw as randomDdw
 from .utils.wallpaper24Common import Wallpaper24Common
 
+ddwFileSuffix = ".ddw"
+
 
 class Wallpaper24Random(object):
     def __init__(self):
         self.wallpaperDir = Settings().wallpaper_dir()
-        self.ddwFile = randomDdw().get_ddw_file(self.wallpaperDir)
+        self.ddwFile = randomDdw().get_ddw_file(self.wallpaperDir, ddwFileSuffix)
         self.executor = Wallpaper24Common(self.ddwFile)
         self.download_path = self.executor.download_path
 

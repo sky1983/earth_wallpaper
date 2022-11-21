@@ -20,7 +20,7 @@ class Thread(QThread):
     def run(self):
         x = getattr(interfaces, self.class_name)()
         print(f"Start run {x.name()}...")
-        if x.name() == "本地壁纸":
+        if x.name() == "本地壁纸" or x.name() == "Linux Dynamic Wallpapers(动态壁纸)":
             img_path = x.run()
             set_wallpaper(img_path)
         else:
