@@ -3,6 +3,7 @@ from earth_wallpaper.utils.setWallpaper import set_wallpaper
 from earth_wallpaper.utils.platformInfo import PlatformInfo
 from earth_wallpaper import interfaces
 import logging
+from earth_wallpaper.interfaces.utils.InterFaceEnum import InterFaceEnum
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class Thread(QThread):
     def run(self):
         logger.info(f"启动{self.class_name}子线程")
         x = getattr(interfaces, self.class_name)()
-        if x.name() == "本地壁纸" or x.name() == "Linux Dynamic Wallpapers(动态壁纸)":
+        if x.name() == "本地壁纸" or x.name() == InterFaceEnum.LinuxDynamicWallpaper.get_show_name():
             img_path = x.run()
             set_wallpaper(img_path)
         else:
