@@ -1,5 +1,6 @@
 from .sunCalculator import SunCalculator, DateTime
 from .platformInfo import PlatformInfo
+from geopy.geocoders import Nominatim
 import os
 import json
 import time
@@ -37,14 +38,27 @@ class Wallpaper24Common(object):
         i = 0
         while i < 3:
             try:
-                ip = session.get("https://checkip.amazonaws.com/",
-                                 timeout=5).text.strip()
-                print(ip)
-                loc = session.get("https://ipapi.co/{}/json/".format(ip),
-                                  timeout=5).json()
-                print(loc)
-                latitude = float(loc["latitude"])
-                longitude = float(loc["longitude"])
+                # ip = session.get("https://checkip.amazonaws.com/",
+                #                  timeout=5).text.strip()
+                # print(ip)
+                # loc = session.get("https://ipapi.co/{}/json/".format(ip),
+                #                   timeout=5).json()
+
+                # loc = {"latitude": "29.5689", "longitude": "106.5577"}
+                #
+                # print(loc)
+                # latitude = float(loc["latitude"])
+                # longitude = float(loc["longitude"])
+
+                geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                                                  '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
+                                                  '@earth-wallpaper-ext')
+                location = geolocator.geocode("重庆市")
+                print(location.address)
+                print(location.latitude, location.longitude)
+                latitude = float(location.latitude)
+                longitude = float(location.longitude)
+
                 i = 3
                 return self.calculate_sun(latitude, longitude)
             except ConnectionResetError:
