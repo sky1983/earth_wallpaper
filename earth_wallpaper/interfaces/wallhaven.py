@@ -2,13 +2,16 @@ from .utils.platformInfo import PlatformInfo
 from .utils.settings import Settings
 from random import randint
 import requests
+import logging
 import json
+
+logger = logging.getLogger(__name__)
 
 
 class Wallhaven(object):
     def __init__(self):
         self.proxies = Settings().proxies()
-        self.search_url = "https://wallhaven.cc/api/v1/search"
+        self.search_url = "https://wallhaven.cc/api/v1/search?ratios=landscape"
         self.img_url = "https://wallhaven.cc/api/v1/w/"
         self.apikey = Settings().apikey()
         self.general = Settings().general()
@@ -28,7 +31,7 @@ class Wallhaven(object):
             categories[1] = '1'
         if self.people:
             categories[2] = '1'
-        self.search_url += f"?categories={''.join(categories)}"
+        self.search_url += f"&categories={''.join(categories)}"
         purity = ['0', '0', '0']
         if self.sfw:
             purity[0] = '1'
@@ -40,7 +43,7 @@ class Wallhaven(object):
         self.search_url += f"&sorting={self.sorting}"
         if not len(self.apikey) == 0:
             self.search_url += f"&apikey={self.apikey}"
-        print("列表json: " + self.search_url)
+        logger.info(f"search_url构造完成:{self.search_url}")
 
     def get_img_url(self):
         img_info = requests.get(self.search_url, proxies=self.proxies)
@@ -49,15 +52,23 @@ class Wallhaven(object):
             self.img_url += img_info_json[randint(0, len(img_info_json) - 1)]["id"]
             if not len(self.apikey) == 0:
                 self.img_url += f"?apikey={self.apikey}"
-            print("图像信息json: " + self.img_url)
+            logger.info(f"图像信息获取成功: {self.img_url}")
+        else:
+            logger.fatal(f"search_url请求失败: {img_info.status_code}")
 
     def download(self):
         img_info = requests.get(self.img_url, proxies=self.proxies)
         if img_info.ok:
             download_url = json.loads(img_info.content.decode())["data"]["path"]
-            print("图像url: " + download_url)
+            logger.info(f"图像url获取成功: {download_url}")
             img = requests.get(download_url, proxies=self.proxies)
-            return img.content
+            if img.ok:
+                logger.info("图像下载成功")
+                return img.content
+            else:
+                logger.fatal(f"图像下载失败: {img.status_code}")
+        else:
+            logger.fatal(f"img_info请求失败: {img_info.status_code}")
 
     def run(self):
         self.build_search_url()
