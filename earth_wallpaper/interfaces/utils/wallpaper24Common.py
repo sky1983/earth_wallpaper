@@ -5,6 +5,10 @@ import os
 import json
 import time
 import requests
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def find_first_json(dir_):
@@ -12,6 +16,7 @@ def find_first_json(dir_):
     for file in files:
         if file.endswith(".json"):
             return file
+    logger.fatal("找不到json文件")
 
 
 class Wallpaper24Common(object):
@@ -54,35 +59,35 @@ class Wallpaper24Common(object):
                                                   '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
                                                   '@earth-wallpaper-ext')
                 location = geolocator.geocode("重庆市")
-                print(location.address)
-                print(location.latitude, location.longitude)
+                logger.info(location.address)
+                logger.info(location.latitude, location.longitude)
                 latitude = float(location.latitude)
                 longitude = float(location.longitude)
 
                 i = 3
                 return self.calculate_sun(latitude, longitude)
             except ConnectionResetError:
-                print(f"本机IP获取失败，第{i + 1}次重试")
+                logger.warning(f"本机IP获取失败，第{i + 1}次重试")
                 if i == 3:
                     return self.calculate_time(5, 18)
                 else:
                     i += 1
             except KeyError:
-                print("API响应错误，使用默认时间")
+                logger.warning("API响应错误，使用默认时间")
                 i = 3
                 return self.calculate_time(5, 18)
             except TypeError:
-                print("该IP获取不到地理坐标，使用默认时间")
+                logger.warning("该IP获取不到地理坐标，使用默认时间")
                 i = 3
                 return self.calculate_time(5, 18)
             except requests.exceptions.ReadTimeout:
-                print(f"请求超时,第{i + 1}次重试...")
+                logger.warning(f"请求超时,第{i + 1}次重试...")
                 if i == 3:
                     return self.calculate_time(5, 18)
                 else:
                     i += 1
             except requests.exceptions.ConnectionError:
-                print("无网络连接,使用默认时间")
+                logger.warning("无网络连接,使用默认时间")
                 i = 3
                 return self.calculate_time(5, 18)
 
@@ -110,7 +115,7 @@ class Wallpaper24Common(object):
         hour = time.localtime(time.time()).tm_hour
 
         if 'sunriseImageList' not in theme and hour in sunrise:
-            print('sunrise day')
+            logger.info('sunrise day')
             newDay = day + sunrise
             num = len(newDay) // len(theme["dayImageList"])
             index = newDay.index(hour) // num
@@ -122,7 +127,7 @@ class Wallpaper24Common(object):
                 return data
 
         if 'sunsetImageList' not in theme and hour in sunset:
-            print('sunset night')
+            logger.info('sunset night')
             newNight = night + sunset
             num = len(newNight) // len(theme["nightImageList"])
             index = newNight.index(hour) // num
@@ -134,7 +139,7 @@ class Wallpaper24Common(object):
                 return data
 
         if hour in sunrise:
-            print('sunrise')
+            logger.info('sunrise')
             num = len(sunrise) // len(theme["sunriseImageList"])
             index = sunrise.index(hour) // num
             if index >= len(theme["sunriseImageList"]):
@@ -144,7 +149,7 @@ class Wallpaper24Common(object):
                 data = fp.read()
                 return data
         elif hour in day:
-            print('day')
+            logger.info('day')
             num = len(day) // len(theme["dayImageList"])
             index = day.index(hour) // num
             if index >= len(theme["dayImageList"]):
@@ -154,7 +159,7 @@ class Wallpaper24Common(object):
                 data = fp.read()
             return data
         elif hour in sunset:
-            print('sunset')
+            logger.info('sunset')
             num = len(sunset) // len(theme["sunsetImageList"])
             index = sunset.index(hour) // num
             if index >= len(theme["sunsetImageList"]):
@@ -164,7 +169,7 @@ class Wallpaper24Common(object):
                 data = fp.read()
             return data
         elif hour in night:
-            print('night')
+            logger.info('night')
             num = len(night) // len(theme["nightImageList"])
             index = night.index(hour) // num
             if index >= len(theme["nightImageList"]):
@@ -174,7 +179,7 @@ class Wallpaper24Common(object):
                 data = fp.read()
             return data
         else:
-            print("Error")
+            logger.error("Error")
 
     def run(self):
         self.check()
