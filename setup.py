@@ -2,7 +2,6 @@
 from setuptools import setup, find_packages
 from earth_wallpaper.about import get_version
 
-
 with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
@@ -19,7 +18,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        'earth_wallpaper': ['resource/earth-wallpaper.png','utils/xfce.sh']
+        'earth_wallpaper': ['resource/earth-wallpaper.png', 'utils/xfce.sh']
     },
     entry_points={
         'console_scripts': ['earth-wallpaper = earth_wallpaper.main:main']
@@ -31,6 +30,7 @@ setup(
         'geopy',
         # dbus-python 1.3.2版本使用了新的编译方式，可通过指定 sudo su 切换到超级用户，让后指定环境变量
         # export DBUS_PYTHON_USE_AUTOTOOLS=1 切换为原始编译方式
+        'pysocks',
         'dbus-python; platform_system == "Linux"',
         'dbus-next; platform_system == "Linux"',
         'pywin32; platform_system == "Windows"'

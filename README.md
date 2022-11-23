@@ -7,6 +7,7 @@
 [![downloads](https://img.shields.io/github/downloads/ambition-echo/earth_wallpaper/total)](https://github.com/ambition-echo/earth_wallpaper/releases)
 [![Release](https://img.shields.io/github/v/release/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/releases)
 [![License](https://img.shields.io/github/license/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/blob/main/LICENSE)
+[![Visitor](https://visitor-badge.glitch.me/badge?page_id=ambition-echo.earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper)
 
 [![PyPI](https://img.shields.io/pypi/v/earth-wallpaper?logo=python)](https://pypi.org/project/earth-wallpaper/)
 [![AUR version](https://img.shields.io/aur/version/earth-wallpaper-bin?label=earth-wallpaper-bin&logo=archlinux)](https://aur.archlinux.org/packages/earth-wallpaper-bin)
@@ -53,6 +54,7 @@ pip install earth-wallpaper --upgrade # 更新
 - [x] 动漫壁纸 (调用 [waifu.im](https://waifu.im/) API)
 - [x] 本地壁纸 (注：目前Windows下使用本地壁纸，路径需要全英文且无空格)
 - [x] 24h壁纸 (灵感来自于[windynamicdesktop](https://github.com/t1m0thyj/windynamicdesktop))
+- [x] wallhaven.cc ([wallhaven.cc](https://wallhaven.cc))
 
 > 24h壁纸推荐下载地址:
 >
@@ -74,6 +76,7 @@ pip install earth-wallpaper --upgrade # 更新
 - [x] Cutefish
 - [x] LXQt (pcmanfm-qt)
 - [x] LXDE (pcmanfm)
+- [x] 自定义脚本设置壁纸
 
 ### Windows
 

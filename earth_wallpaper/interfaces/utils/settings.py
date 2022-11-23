@@ -17,7 +17,7 @@ class Settings(object):
         self.settings = QSettings(config_path, QSettings.IniFormat)
 
     def proxies(self) -> dict:
-        type_list = ["None", "http", "socks"]
+        type_list = ["None", "http", "socks5h"]
         prx_type = type_list[int(self.settings.value("System/proxy"))]
         prx_add = self.settings.value("System/proxyAdd")
         prx_port = self.settings.value("System/proxyPort")
@@ -60,6 +60,12 @@ class Settings(object):
 
     def sorting(self):
         return self.settings.value("APP/sorting").lower().replace(" ", "_")
+
+    def searchkey(self):
+        return self.settings.value("APP/searchkey")
+
+    def color(self):
+        return self.settings.value("APP/color")
 
     @staticmethod
     def desktop_res() -> (int, int):
