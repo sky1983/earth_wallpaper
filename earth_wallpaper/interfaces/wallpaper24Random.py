@@ -1,7 +1,7 @@
-from .utils.platformInfo import PlatformInfo
 from .utils.settings import Settings
 from .utils.randomddw import RandomDdw as randomDdw
 from .utils.wallpaper24Common import Wallpaper24Common
+from .utils.InterFaceEnum import InterFaceEnum
 
 ddwFileSuffix = ".ddw"
 
@@ -18,7 +18,7 @@ class Wallpaper24Random(object):
 
     @staticmethod
     def name():
-        return "24h壁纸(随机)"
+        return InterFaceEnum.Wallpaper24Random.get_show_name()
 
     @staticmethod
     def layout():

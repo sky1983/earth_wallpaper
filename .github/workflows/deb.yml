@@ -7,7 +7,6 @@ on:
       - 'LICENSE'
 
 jobs:
-  #Linux编译
   Package:
     name: Package
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
       - name: Package
         run: |
           sed -i "s/Version:.*/Version: $(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')/g" deb/DEBIAN/control
-          sed -i "s/return.*/return \"$(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')\"/g" earth_wallpaper/about.py
+          sed -i "s/return \".*/return \"$(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')\"/g" earth_wallpaper/about.py
           mkdir -p deb/opt/earth-wallpaper
           cp -r earth_wallpaper deb/opt/earth-wallpaper/earth_wallpaper
           chmod 755 deb/DEBIAN/* && chmod 755 deb/DEBIAN
@@ -34,7 +33,7 @@ jobs:
           name: earth-wallpaper-amd64.deb
           path: earth-wallpaper-amd64.deb
           if-no-files-found: error
-      #6发布release
+
       - name: Upload Release
         if: startsWith(github.ref, 'refs/tags')
         uses: svenstaro/upload-release-action@v2

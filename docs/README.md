@@ -17,17 +17,23 @@ Simple and easy to use multifunctional wallpaper software
 ### Linux
 
 #### Debian
+
 Download `earth-wallpaper-amd64.deb` and install via apt or dpkg
+
 #### Arch
+
 Install from [AUR](https://aur.archlinux.org/packages?O=0&K=earth-wallpaper-)
 
 ### Windows
+
 Install via pip
 need python3 installed
+
 ```shell
 pip install earth-wallpaper # install
 pip install earth-wallpaper --upgrade #update
 ```
+
 ### Usage Notice
 
 When you run it for the first time, the settings window will pop up, click ```Apply``` to start running
@@ -40,6 +46,7 @@ When you run it for the first time, the settings window will pop up, click ```Ap
 - [x] Anime Wallpaper (Call [waifu.im](https://waifu.im/) API)
 - [x] Local Wallpaper
 - [x] 24h Wallpaper (Inspired by [windynamicdesktop](https://github.com/t1m0thyj/windynamicdesktop))
+- [x] wallhaven.cc ([wallhaven.cc](https://wallhaven.cc))
 
 > 24h Wallpaper recommended download address:
 >
@@ -61,6 +68,7 @@ When you run it for the first time, the settings window will pop up, click ```Ap
 - [x] Cutefish
 - [x] LXQt (pcmanfm-qt 或者 pcmanfm)
 - [x] LXDE (pcmanfm)
+- [x] Custom script
 
 ### Windows
 
@@ -89,6 +97,8 @@ bing: [https://github.com/xCss/bing](https://github.com/xCss/bing)
 waifu.im: [https://waifu.im/](https://waifu.im/)
 
 ipapi: [https://ipapi.co](https://ipapi.co)
+
+wallhaven: [https://wallhaven.cc/help/api](https://wallhaven.cc/help/api)
 
 ## ScreenShot
 

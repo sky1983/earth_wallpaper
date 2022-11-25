@@ -7,6 +7,7 @@
 [![downloads](https://img.shields.io/github/downloads/ambition-echo/earth_wallpaper/total)](https://github.com/ambition-echo/earth_wallpaper/releases)
 [![Release](https://img.shields.io/github/v/release/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/releases)
 [![License](https://img.shields.io/github/license/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/blob/main/LICENSE)
+[![Visitor](https://visitor-badge.glitch.me/badge?page_id=ambition-echo.earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper)
 
 [![PyPI](https://img.shields.io/pypi/v/earth-wallpaper?logo=python)](https://pypi.org/project/earth-wallpaper/)
 [![AUR version](https://img.shields.io/aur/version/earth-wallpaper-bin?label=earth-wallpaper-bin&logo=archlinux)](https://aur.archlinux.org/packages/earth-wallpaper-bin)
@@ -23,16 +24,19 @@
 #### Arch
 
 通过[AUR](https://aur.archlinux.org/packages?O=0&K=earth-wallpaper-)安装
+
 ```shell
 # paru
 paru -S earth-wallpaper-bin # or earth-wallpaper-nightly
 # yay
 yay -S earth-wallpaper-bin  # or earth-wallpaper-nightly
 ```
+
 ### Windows
 
 Windows推荐使用pip安装
 需要实现安装好python3
+
 ```shell
 pip install earth-wallpaper # 安装
 pip install earth-wallpaper --upgrade # 更新
@@ -50,6 +54,7 @@ pip install earth-wallpaper --upgrade # 更新
 - [x] 动漫壁纸 (调用 [waifu.im](https://waifu.im/) API)
 - [x] 本地壁纸 (注：目前Windows下使用本地壁纸，路径需要全英文且无空格)
 - [x] 24h壁纸 (灵感来自于[windynamicdesktop](https://github.com/t1m0thyj/windynamicdesktop))
+- [x] wallhaven.cc ([wallhaven.cc](https://wallhaven.cc))
 
 > 24h壁纸推荐下载地址:
 >
@@ -57,10 +62,10 @@ pip install earth-wallpaper --upgrade # 更新
 >
 > [https://windd.info/themes/index.html](https://windd.info/themes/index.html)
 
-
 ## 支持桌面环境
 
 ### Linux
+
 - [x] KDE Plasma
 - [x] Deepin
 - [x] GNOME
@@ -71,8 +76,10 @@ pip install earth-wallpaper --upgrade # 更新
 - [x] Cutefish
 - [x] LXQt (pcmanfm-qt)
 - [x] LXDE (pcmanfm)
+- [x] 自定义脚本设置壁纸
 
 ### Windows
+
 - [x] Windows 10 (测试环境：Windows 10 专业版 21H1，其他版本自行测试)
 
 ## 依赖
@@ -97,7 +104,9 @@ bing 壁纸: [https://github.com/xCss/bing](https://github.com/xCss/bing)
 
 waifu.im 动漫壁纸: [https://waifu.im/](https://waifu.im/)
 
-ipapi 获取ip地理位置：[https://ipapi.co](https://ipapi.co)
+ipapi 获取ip地理位置: [https://ipapi.co](https://ipapi.co)
+
+wallhaven 壁纸: [https://wallhaven.cc/help/api](https://wallhaven.cc/help/api)
 
 ## 软件截图
 

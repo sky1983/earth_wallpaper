@@ -1,5 +1,61 @@
 # CHANGELOG
 
+## 2.1.3 (2022-11-23)
+
+### New feature:
+
+- **wallhaven**: 添加搜索关键词和颜色选项([`879296f`](https://github.com/ambition-echo/earth_wallpaper/commit/879296fc690c4e583daec69a030cc5042622ebe8)) (by ambition_echo)
+
+### Bugs fixed:
+
+- **proxy**: 修复socks5代理设置无效的问题([`2594125`](https://github.com/ambition-echo/earth_wallpaper/commit/2594125281010940a62d94ad28a87d8e45e0698f)) (by ambition_echo)
+
+## 2.1.2 (2022-11-22)
+
+### New feature:
+
+- **config**: 新增删除缓存功能([`d484a42`](https://github.com/ambition-echo/earth_wallpaper/commit/d484a42ca7cb2a371ec8ba8fe97fcbb4f45564c1)) (by ambition_echo)
+
+### Bugs fixed:
+
+- **deb**: 修复control格式([`97b410f`](https://github.com/ambition-echo/earth_wallpaper/commit/97b410fa174a6596220a51b7a95ca6810b83cfa1)) (by ambition_echo)
+- **package**: 修复deb包依赖([`aa3b7df`](https://github.com/ambition-echo/earth_wallpaper/commit/aa3b7df50cc20be946ab400eb6bfef52d63c2bb3)) (by ambition_echo)
+- **wallhaven**: 只获取横版图片([`c8771a0`](https://github.com/ambition-echo/earth_wallpaper/commit/c8771a02aad12023c6b8e1c6d0e5f654b2d4e603)) (by ambition_echo)
+
+## 2.1.1 (2022-11-22)
+
+### Bugs fixed:
+
+- **ci**: 修复打包脚本导致的版本异常问题([`8632db8`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/8632db88a2ecf174100e2e829bbdc13ee52c0236)) (by ambition_echo)
+
+## 2.1.0 (2022-11-22)
+
+### New feature:
+
+- **save_img**: 不再每次删除cache([`5be4c88`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/5be4c884fa234add28adeeb7995b1e8497c1b6fb)) (by ambition_echo)
+- **ALL**: 新增日志记录系统([`cc6317f`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/cc6317f4a8e8789297edbe4bf345d865f3ad376a)) (by ambition_echo)
+- **about**: 动态调节设置页面大小([`9f6715c`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/9f6715ca550a6e87cc73d9d171b118361151f76c)) (by ambition_echo)
+- **about**: 添加启动时检查更新([`9148af4`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/9148af46e16e68a9a7b260a0f1056128089cf6f9)) (by ambition_echo)
+- **about**: 新增检查更新功能([`fdb12d0`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/fdb12d0e1e3f8522347200cf064d7bafad67dcb6)) (by ambition_echo)
+
+## 2.0.9 (2022-11-21)
+
+### Bugs fixed:
+
+- **wallhaven**: 修复wallhaven随机列表不生效的问题([`2970adb`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/2970adb5d64c31466e2bce3de0c8c05ea4ca21fe)) (by ambition_echo)
+
+## 2.0.8 (2022-11-21)
+
+### Bugs fixed:
+
+- **wallhaven**: 修复没有更新时间设置项([`293f7fa`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/293f7fa947557f586bd2d54f102e17bc87e43429)) (by ambition_echo)
+
+## 2.0.7 (2022-11-21)
+
+### New feature:
+
+- **interfaces**: 添加wallhaven网站接口([`59e97e0`](https://jihulab.com/ambition-echo/earth_wallpaper/commit/59e97e068e95f1f3b5181d6ddf939166aa6a79c5)) (by ambition_echo)
+
 ## 2.0.4 (2022-11-20)
 
 ### Bugs fixed:
@@ -18,6 +74,7 @@
 ## 1.8.5 (2022-09-29)
 
 ### New feature:
+
 - **scripts**: 增加对 Linux 桌面环境 Cutefish 的支持([`#9`](https://github.com/ambition-echo/earth_wallpaper/pull/9)) (by [lisuke](https://github.com/lisuke))
 
 ## 1.8.4 (2022-09-19)

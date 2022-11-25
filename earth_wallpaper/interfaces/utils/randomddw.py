@@ -50,7 +50,7 @@ class RandomDdw(object):
             return False
 
     @staticmethod
-    def ddw_filter_current(self, current_ddw, f):
+    def ddw_filter_current(current_ddw, f):
         if f == current_ddw:
             return False
         else:

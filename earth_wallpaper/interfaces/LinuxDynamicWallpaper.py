@@ -1,10 +1,11 @@
 from .utils.settings import Settings
 from .utils.randomddw import RandomDdw as randomDdw
+from .utils.InterFaceEnum import InterFaceEnum
 
 xmlFileSuffix = ".xml"
 
 
-class DynamicWallpapers(object):
+class LinuxDynamicWallpaper(object):
 
     def __init__(self):
         self.wallpaperDir = Settings().wallpaper_dir()
@@ -16,7 +17,7 @@ class DynamicWallpapers(object):
     @staticmethod
     def name():
         # https://github.com/saint-13/Linux_Dynamic_Wallpapers
-        return "Linux Dynamic Wallpapers(动态壁纸)"
+        return InterFaceEnum.LinuxDynamicWallpaper.get_show_name()
 
     @staticmethod
     def layout():
@@ -25,5 +26,5 @@ class DynamicWallpapers(object):
 
 
 if __name__ == "__main__":
-    x = DynamicWallpapers()
+    x = LinuxDynamicWallpaper()
     x.run()
