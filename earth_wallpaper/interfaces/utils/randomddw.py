@@ -3,6 +3,10 @@ import os
 import json
 import datetime
 import random
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 record = "ddwrecord.json"
 currentFile = "currentFile"
@@ -20,8 +24,8 @@ class RandomDdw(object):
         if os.path.exists(temp_record):
             with open(temp_record, 'r') as f:
                 record_json = json.load(f)
-                print(record_json[currentFile])
-                print(record_json[recordDate])
+                logger.info(f"今日壁纸文件文件:{record_json[currentFile]}")
+                logger.info(f"当前日期:{record_json[recordDate]}")
                 if today_str == record_json[recordDate]:
                     return ddw_dir + "/" + record_json[currentFile]
                 files = list(filter(lambda seq: self.ddw_filter_current(record_json[currentFile], seq), files))
@@ -35,7 +39,7 @@ class RandomDdw(object):
 
     @staticmethod
     def write_json(temp_record, file, today):
-        print("当前文件位置：" + temp_record)
+        logger.info(f"当前文件位置：{temp_record}")
         record_json = {currentFile: file, recordDate: today}
         json_data = json.dumps(record_json, indent=4, ensure_ascii=False)
         f = open(temp_record, 'w')
