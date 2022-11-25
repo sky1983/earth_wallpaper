@@ -1,6 +1,7 @@
 from .sunCalculator import SunCalculator, DateTime
 from .platformInfo import PlatformInfo
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
 import os
 import json
 import time
@@ -55,12 +56,14 @@ class Wallpaper24Common(object):
                 # latitude = float(loc["latitude"])
                 # longitude = float(loc["longitude"])
 
-                geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                                                  '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
-                                                  '@earth-wallpaper-ext')
-                location = geolocator.geocode("重庆市")
+                # geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                #                                   '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
+                #                                   '@earth-wallpaper-ext')
+                # location = geolocator.geocode("重庆市")
+                location = self.do_geocode(address="重庆市")
                 logger.info(location.address)
-                logger.info(location.latitude, location.longitude)
+                logger.info(f"经度： {location.latitude}")
+                logger.info(f"纬度： {location.longitude}")
                 latitude = float(location.latitude)
                 longitude = float(location.longitude)
 
@@ -180,6 +183,19 @@ class Wallpaper24Common(object):
             return data
         else:
             logger.error("Error")
+
+    def do_geocode(self, address, attempt=1, max_attempts=5):
+        try:
+            geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 '
+                                              '(KHTML, like Gecko) Chrome/100.0.3770.90 Safari/537.36 '
+                                              '@earth-wallpaper-ext')
+            return geolocator.geocode(address)
+        except GeocoderTimedOut:
+            if attempt <= max_attempts:
+                return self.do_geocode(address, attempt=attempt + 1)
+            raise
+            loc = {"latitude": "29.5689", "longitude": "106.5577"}
+            return loc
 
     def run(self):
         self.check()
