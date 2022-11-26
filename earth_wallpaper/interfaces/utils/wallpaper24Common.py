@@ -1,6 +1,8 @@
 from .sunCalculator import SunCalculator, DateTime
 from .platformInfo import PlatformInfo
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+from .AddressConfig import AddressConfig
 import os
 import json
 import time
@@ -25,6 +27,7 @@ class Wallpaper24Common(object):
         self.cache = PlatformInfo().download_dir()
         self.download_path = PlatformInfo().download_path(".png")
         self.unpackDir = self.cache + self.wallpaperFile.split("/")[-1].split(".")[0]
+        self.addressConfig = AddressConfig()
 
     def check(self):
         if not os.path.exists(self.cache):
@@ -55,14 +58,24 @@ class Wallpaper24Common(object):
                 # latitude = float(loc["latitude"])
                 # longitude = float(loc["longitude"])
 
-                geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                                                  '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
-                                                  '@earth-wallpaper-ext')
-                location = geolocator.geocode("重庆市")
-                logger.info(location.address)
-                logger.info(location.latitude, location.longitude)
-                latitude = float(location.latitude)
-                longitude = float(location.longitude)
+                # geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                #                                   '(KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36 '
+                #                                   '@earth-wallpaper-ext')
+                # location = geolocator.geocode("重庆市")
+                # location = self.do_geocode(address="重庆市")
+                # logger.info(location.address)
+                # logger.info(f"经度： {location.longitude}")
+                # logger.info(f"纬度： {location.latitude}")
+                # longitude = float(location.longitude)
+                # latitude = float(location.latitude)
+
+                location = self.addressConfig.get_addr()
+
+                logger.info(location["address"])
+                logger.info(f"经度： {location['longitude']}")
+                logger.info(f"纬度： {location['latitude']}")
+                longitude = float(location['longitude'])
+                latitude = float(location['latitude'])
 
                 i = 3
                 return self.calculate_sun(latitude, longitude)
@@ -180,6 +193,22 @@ class Wallpaper24Common(object):
             return data
         else:
             logger.error("Error")
+
+    def do_geocode(self, address, attempt=1, max_attempts=5):
+        try:
+            geolocator = Nominatim(user_agent='Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 '
+                                              '(KHTML, like Gecko) Chrome/100.0.3770.90 Safari/537.36 '
+                                              '@earth-wallpaper-ext')
+            return geolocator.geocode(address)
+        except GeocoderTimedOut:
+            if attempt <= max_attempts:
+                return self.do_geocode(address, attempt=attempt + 1)
+            raise
+        except Exception as error:
+            message = str(error)
+            logger.warning(f"获取经纬度信息发送严重错误{message}，将使用配置的经纬度信息...")
+            loc = {"latitude": "29.5647398", "longitude": "106.5478767"}
+            return loc
 
     def run(self):
         self.check()
