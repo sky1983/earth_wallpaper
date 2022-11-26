@@ -1,6 +1,6 @@
 #!/bin/python3
-import sys, os
-
+import sys
+import os
 # 添加path路径，否则有可能会找不到模块
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 from PySide6.QtWidgets import QApplication, QMessageBox
@@ -23,12 +23,10 @@ def main():
                                   datefmt='%H:%M:%S')
     # 输出到文件
     fh = logging.FileHandler(PlatformInfo.log_path())
-    fh.setLevel(logging.INFO)
     fh.setFormatter(formatter)
 
     # 输出到控制台
     ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
     ch.setFormatter(formatter)
 
     logger.addHandler(ch)

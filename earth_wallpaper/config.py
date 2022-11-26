@@ -1,5 +1,3 @@
-import shutil
-
 from PySide6.QtCore import Qt, QSettings, Signal
 from PySide6.QtGui import QIcon, QPixmap, QPainter, QColor
 from PySide6.QtWidgets import QWidget, QMessageBox, QFileDialog
@@ -7,6 +5,7 @@ from earth_wallpaper.ui.UI_config import Ui_Config
 from earth_wallpaper.utils.platformInfo import PlatformInfo
 from earth_wallpaper import interfaces
 import logging
+import shutil
 import os
 
 logger = logging.getLogger(__name__)
@@ -33,14 +32,13 @@ class Config(QWidget, Ui_Config):
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.config_path = PlatformInfo.config_path()
         self.path = os.path.split(os.path.realpath(__file__))[0]
-        self.setWindowIcon(
-            QIcon(os.path.join(self.path, "resource/earth-wallpaper.png")))
+        self.setWindowIcon(QIcon(os.path.join(self.path, "resource/earth-wallpaper.png")))
         self.setupUi(self)
         self.initUI()
         self.check()
         self.read_config()
-        self._update_layout_()
-        self._connect_()
+        self.update_layout()
+        self.init_connect()
         self.show()
 
     def initUI(self):
@@ -59,7 +57,7 @@ class Config(QWidget, Ui_Config):
         self.sorting.addItem("Hot")
         self.init_color_select()
 
-    def _update_layout_(self):
+    def update_layout(self):
         updateTimeGroup = [self.updateTime, self.updateTime_l]
         earthSizeGroup = [self.earthSize, self.earthSize_l]
         wallpaperDirGroup = [self.wallpaperDir,
@@ -85,8 +83,8 @@ class Config(QWidget, Ui_Config):
                 j.show()
         self.resize(1, 1)
 
-    def _connect_(self):
-        self.source.currentIndexChanged.connect(self._update_layout_)
+    def init_connect(self):
+        self.source.currentIndexChanged.connect(self.update_layout)
         self.closeBtn.clicked.connect(self.close)
         self.applyBtn.clicked.connect(self.write_config)
         self.selectFile.clicked.connect(self.select_file)
@@ -226,61 +224,15 @@ class Config(QWidget, Ui_Config):
     def init_color_select(self):
         pix = QPixmap(16, 16)
         painter = QPainter(pix)
-        painter.fillRect(0, 0, 16, 16, QColor("#660000"))
-        self.color.addItem(QIcon(pix), "660000")
-        painter.fillRect(0, 0, 16, 16, QColor("#990000"))
-        self.color.addItem(QIcon(pix), "990000")
-        painter.fillRect(0, 0, 16, 16, QColor("#cc0000"))
-        self.color.addItem(QIcon(pix), "cc0000")
-        painter.fillRect(0, 0, 16, 16, QColor("#cc3333"))
-        self.color.addItem(QIcon(pix), "cc3333")
-        painter.fillRect(0, 0, 16, 16, QColor("#ea4c88"))
-        self.color.addItem(QIcon(pix), "ea4c88")
-        painter.fillRect(0, 0, 16, 16, QColor("#993399"))
-        self.color.addItem(QIcon(pix), "993399")
-        painter.fillRect(0, 0, 16, 16, QColor("#663399"))
-        self.color.addItem(QIcon(pix), "663399")
-        painter.fillRect(0, 0, 16, 16, QColor("#333399"))
-        self.color.addItem(QIcon(pix), "333399")
-        painter.fillRect(0, 0, 16, 16, QColor("#0066cc"))
-        self.color.addItem(QIcon(pix), "0066cc")
-        painter.fillRect(0, 0, 16, 16, QColor("#0099cc"))
-        self.color.addItem(QIcon(pix), "0099cc")
-        painter.fillRect(0, 0, 16, 16, QColor("#66cccc"))
-        self.color.addItem(QIcon(pix), "66cccc")
-        painter.fillRect(0, 0, 16, 16, QColor("#77cc33"))
-        self.color.addItem(QIcon(pix), "77cc33")
-        painter.fillRect(0, 0, 16, 16, QColor("#669900"))
-        self.color.addItem(QIcon(pix), "669900")
-        painter.fillRect(0, 0, 16, 16, QColor("#336600"))
-        self.color.addItem(QIcon(pix), "336600")
-        painter.fillRect(0, 0, 16, 16, QColor("#666600"))
-        self.color.addItem(QIcon(pix), "666600")
-        painter.fillRect(0, 0, 16, 16, QColor("#cccc33"))
-        self.color.addItem(QIcon(pix), "cccc33")
-        painter.fillRect(0, 0, 16, 16, QColor("#ffff00"))
-        self.color.addItem(QIcon(pix), "ffff00")
-        painter.fillRect(0, 0, 16, 16, QColor("#ffcc33"))
-        self.color.addItem(QIcon(pix), "ffcc33")
-        painter.fillRect(0, 0, 16, 16, QColor("#ff9900"))
-        self.color.addItem(QIcon(pix), "ff9900")
-        painter.fillRect(0, 0, 16, 16, QColor("#ff6600"))
-        self.color.addItem(QIcon(pix), "ff6600")
-        painter.fillRect(0, 0, 16, 16, QColor("#cc6633"))
-        self.color.addItem(QIcon(pix), "cc6633")
-        painter.fillRect(0, 0, 16, 16, QColor("#996633"))
-        self.color.addItem(QIcon(pix), "996633")
-        painter.fillRect(0, 0, 16, 16, QColor("#663300"))
-        self.color.addItem(QIcon(pix), "663300")
-        painter.fillRect(0, 0, 16, 16, QColor("#000000"))
-        self.color.addItem(QIcon(pix), "000000")
-        painter.fillRect(0, 0, 16, 16, QColor("#999999"))
-        self.color.addItem(QIcon(pix), "999999")
-        painter.fillRect(0, 0, 16, 16, QColor("#cccccc"))
-        self.color.addItem(QIcon(pix), "cccccc")
-        painter.fillRect(0, 0, 16, 16, QColor("#ffffff"))
-        self.color.addItem(QIcon(pix), "ffffff")
-        painter.fillRect(0, 0, 16, 16, QColor("#424153"))
-        self.color.addItem(QIcon(pix), "424153")
+        color_list = ['#660000', '#990000', '#cc0000', '#cc3333', '#ea4c88',
+                      '#993399', '#663399', '#333399', '#0066cc', '#0099cc',
+                      '#66cccc', '#77cc33', '#669900', '#336600', '#666600',
+                      '#999900', '#cccc33', '#ffff00', '#ffcc33', '#ff9900',
+                      '#ff6600', '#cc6633', '#996633', '#663300', '#000000',
+                      '#999999', '#cccccc', '#ffffff', '#424153']
+        for i in color_list:
+            painter.fillRect(0, 0, 16, 16, QColor(i))
+            self.color.addItem(QIcon(pix), i)
         self.color.addItem("不选择")
         painter.end()
+        self.color.setFont("MonoSpace")
