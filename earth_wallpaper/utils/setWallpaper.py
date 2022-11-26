@@ -46,7 +46,7 @@ def set_wallpaper(file):
         logger.info(f"当前桌面环境为{de}")
         de_list = {
             "X-Cinnamon": Cinnamon,
-            "ubuntu:Gnome": Gnome,
+            "ubuntu:GNOME": Gnome,
             "Cutefish": Cutefish,
             "Deepin": Deepin,
             "Gnome": Gnome,
