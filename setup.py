@@ -28,6 +28,7 @@ setup(
         'PySide6',
         'requests',
         'geopy',
+        'screen_brightness_control',
         # dbus-python 1.3.2版本使用了新的编译方式，可通过指定 sudo su 切换到超级用户，让后指定环境变量
         # export DBUS_PYTHON_USE_AUTOTOOLS=1 切换为原始编译方式
         'pysocks',
