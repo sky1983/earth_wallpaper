@@ -28,13 +28,13 @@ class DeepinBrightness(object):
             logger.info(f"sunrise 屏幕亮度设置为：{sunriseBrightness}")
             return sunriseBrightness
         elif hour in day:
-            logger.info(f"sunrise 屏幕亮度设置为：{dayBrightness}")
+            logger.info(f"day 屏幕亮度设置为：{dayBrightness}")
             return dayBrightness
         elif hour in sunset:
-            logger.info(f"sunrise 屏幕亮度设置为：{sunsetBrightness}")
+            logger.info(f"sunset 屏幕亮度设置为：{sunsetBrightness}")
             return sunsetBrightness
         elif hour in night:
-            logger.info(f"sunrise 屏幕亮度设置为：{nightBrightness}")
+            logger.info(f"night 屏幕亮度设置为：{nightBrightness}")
             return nightBrightness
 
     def exec_setting(self):
