@@ -4,7 +4,7 @@ from earth_wallpaper import interfaces
 from PySide6.QtCore import QThread
 import logging
 from earth_wallpaper.interfaces.utils.InterFaceEnum import InterFaceEnum
-from .brightness.Brightness import Brightness
+from earth_wallpaper.brightness.Brightness import Brightness
 
 logger = logging.getLogger(__name__)
 

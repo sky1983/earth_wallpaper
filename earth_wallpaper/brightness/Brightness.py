@@ -5,7 +5,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Brightness(object):
+class Brightness:
+
+    def __init__(self):
+        pass
 
     @staticmethod
     def set_brightness():
