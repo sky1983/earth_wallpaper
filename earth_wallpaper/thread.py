@@ -1,9 +1,10 @@
-from PySide6.QtCore import QThread
 from earth_wallpaper.utils.setWallpaper import set_wallpaper
 from earth_wallpaper.utils.platformInfo import PlatformInfo
 from earth_wallpaper import interfaces
+from PySide6.QtCore import QThread
 import logging
 from earth_wallpaper.interfaces.utils.InterFaceEnum import InterFaceEnum
+from .brightness.Brightness import Brightness
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,7 @@ class Thread(QThread):
         super(Thread, self).__init__()
         self.class_name = get_class_name(name)
         self.flag = True
+        self.brightness = Brightness()
 
     def run(self):
         logger.info(f"启动{self.class_name}子线程")
@@ -34,6 +36,7 @@ class Thread(QThread):
                 with open(x.download_path, "wb") as f:
                     f.write(img)
                 set_wallpaper(x.download_path)
+        self.brightness.run()
         logger.info(f"{self.class_name}子线程运行完成")
 
     def stop(self):
