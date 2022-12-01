@@ -207,7 +207,7 @@ class Wallpaper24Common(object):
         except Exception as error:
             message = str(error)
             logger.warning(f"获取经纬度信息发送严重错误{message}，将使用配置的经纬度信息...")
-            loc = {"latitude": "29.5647398", "longitude": "106.5478767"}
+            loc = {"address": "", "latitude": "29.5647398", "longitude": "106.5478767"}
             return loc
 
     def run(self):

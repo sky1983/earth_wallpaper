@@ -1,9 +1,7 @@
 from dbus_next.aio import MessageBus
 from subprocess import run, PIPE
-from earth_wallpaper.interfaces.utils.sunCalculator import SunCalculator, DateTime
-import time
 import asyncio
-from earth_wallpaper.interfaces.utils.AddressConfig import AddressConfig
+from .BrightnessUtils import BrightnessUtils
 
 import logging
 
@@ -18,43 +16,31 @@ nightBrightness = 0.2
 
 class DeepinBrightness(object):
 
-    def __init__(self):
-        self.addressConfig = AddressConfig()
-
     @staticmethod
-    def calculate_sun(location):
-        logger.info(f"经度： {location['longitude']}")
-        logger.info(f"纬度： {location['latitude']}")
-        latitude = float(location['latitude'])
-        longitude = float(location['longitude'])
-
-        dt = DateTime()
-        sun_calculator = SunCalculator(dt.Y, dt.M, dt.D, latitude, longitude)
-        st = sun_calculator.getSunTimes()
-        sunrise_time = int(st.sunrise)
-        sunset_time = int(st.sunset)
-        sunrise = list(range(sunrise_time, sunrise_time + 4))
-        day = list(range(sunrise_time + 4, sunset_time))
-        sunset = [x % 24 for x in range(sunset_time, sunset_time + 4)]
-        if sunset[-1] < sunrise_time:
-            night = list(range(sunset[-1], sunrise_time))
-        else:
-            night = list(range(sunset_time + 4, 24)) + list(range(0, sunrise_time))
-        hour = time.localtime(time.time()).tm_hour
+    def calculate_sun():
+        day_utils = BrightnessUtils.run()
+        sunrise = day_utils.sunrise
+        day = day_utils.day
+        sunset = day_utils.sunset
+        night = day_utils.night
+        hour = day_utils.hour
         if hour in sunrise:
+            logger.info(f"sunrise 屏幕亮度设置为：{sunriseBrightness}")
             return sunriseBrightness
         elif hour in day:
+            logger.info(f"day 屏幕亮度设置为：{dayBrightness}")
             return dayBrightness
         elif hour in sunset:
+            logger.info(f"sunset 屏幕亮度设置为：{sunsetBrightness}")
             return sunsetBrightness
         elif hour in night:
+            logger.info(f"night 屏幕亮度设置为：{nightBrightness}")
             return nightBrightness
 
     def exec_setting(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        location = self.addressConfig.get_addr()
-        loop.run_until_complete(asyncio.wait([self.set_deepin_brightness(self.calculate_sun(location))]))
+        loop.run_until_complete(asyncio.wait([self.set_deepin_brightness(self.calculate_sun())]))
 
     @staticmethod
     async def set_deepin_brightness(brightness):
