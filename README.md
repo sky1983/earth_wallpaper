@@ -1,5 +1,5 @@
 <div align="center">
-   <img width="150" height="150" src="https://jihulab.com/ambition-echo/earth_wallpaper/-/raw/main/assets/earth-wallpaper.png" alt="Logo">
+   <img width="150" height="150" src="https://raw.githubusercontent.com/Pylogmon/earth_wallpaper/main/assets/earth-wallpaper.png" alt="Logo">
    <br/>
   <h1 align="center"><b>earth-wallpaper</b></h1>
   简单好用的多功能壁纸软件
@@ -8,15 +8,15 @@
 
 <div align="center">
 
-[![downloads](https://img.shields.io/github/downloads/ambition-echo/earth_wallpaper/total)](https://github.com/ambition-echo/earth_wallpaper/releases)
-[![Release](https://img.shields.io/github/v/release/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/releases)
-[![License](https://img.shields.io/github/license/ambition-echo/earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper/blob/main/LICENSE)
-[![Visitor](https://visitor-badge.glitch.me/badge?page_id=ambition-echo.earth_wallpaper)](https://github.com/ambition-echo/earth_wallpaper)
+[![downloads](https://img.shields.io/github/downloads/Pylogmon/earth_wallpaper/total)](https://github.com/Pylogmon/earth_wallpaper/releases)
+[![Release](https://img.shields.io/github/v/release/Pylogmon/earth_wallpaper)](https://github.com/Pylogmon/earth_wallpaper/releases)
+[![License](https://img.shields.io/github/license/Pylogmon/earth_wallpaper)](https://github.com/Pylogmon/earth_wallpaper/blob/main/LICENSE)
+[![Visitor](https://visitor-badge.glitch.me/badge?page_id=Pylogmon.earth_wallpaper)](https://github.com/Pylogmon/earth_wallpaper)
 
 [![PyPI](https://img.shields.io/pypi/v/earth-wallpaper?logo=python)](https://pypi.org/project/earth-wallpaper/)
 [![AUR version](https://img.shields.io/aur/version/earth-wallpaper-bin?label=earth-wallpaper-bin&logo=archlinux)](https://aur.archlinux.org/packages/earth-wallpaper-bin)
 [![AUR version](https://img.shields.io/aur/version/earth-wallpaper-nightly?label=earth-wallpaper-nightly&logo=archlinux)](https://aur.archlinux.org/packages/earth-wallpaper-nightly)
-## [English](https://github.com/ambition-echo/earth_wallpaper/blob/main/docs/README.md)
+## [English](https://github.com/Pylogmon/earth_wallpaper/blob/main/docs/README.md)
 </div>
 <br/>
 
@@ -42,13 +42,20 @@ yay -S earth-wallpaper-bin  # or earth-wallpaper-nightly
 ### Windows
 
 Windows推荐使用pip安装
-需要实现安装好python3
+需要事先安装好python3
 
 ```shell
 pip install earth-wallpaper # 安装
 pip install earth-wallpaper --upgrade # 更新
 ```
 
+要取消启动时的命令行窗口，可以使用vbs脚本启动：
+脚本内容如下：
+```vbs
+CreateObject("WScript.Shell").Run "earth-wallpaper",0,True
+```
+
+将此vbs脚本复制到`C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`目录可以实现开机启动
 ## 使用须知
 
 第一次运行时会弹出设置窗口，点击```应用```即可开始运行
@@ -101,7 +108,7 @@ pip install earth-wallpaper --upgrade # 更新
 ## 手动安装
 
 ```shell
-git clone https://jihulab.com/ambition-echo/earth_wallpaper.git
+git clone https://github.com/Pylogmon/earth_wallpaper.git
 cd earth_wallpaper
 python3 setup.py install
 ```
@@ -118,10 +125,18 @@ wallhaven 壁纸: [https://wallhaven.cc/help/api](https://wallhaven.cc/help/api)
 
 ## 软件截图
 
-![bing](https://jihulab.com/ambition-echo/earth_wallpaper/-/raw/main/assets/bing.png)
+![bing](https://raw.githubusercontent.com/Pylogmon/earth_wallpaper/main/assets/bing.png)
 
-![wallpaper24](https://jihulab.com/ambition-echo/earth_wallpaper/-/raw/main/assets/wallpaper24.png)
+![wallpaper24](https://raw.githubusercontent.com/Pylogmon/earth_wallpaper/main/assets/wallpaper24.png)
 
-![fengyun4](https://jihulab.com/ambition-echo/earth_wallpaper/-/raw/main/assets/fengyun4.png)
+![fengyun4](https://raw.githubusercontent.com/Pylogmon/earth_wallpaper/main/assets/fengyun4.png)
 
-![wallhaven](https://jihulab.com/ambition-echo/earth_wallpaper/-/raw/main/assets/wallhaven.png)
+![wallhaven](https://raw.githubusercontent.com/Pylogmon/earth_wallpaper/main/assets/wallhaven.png)
+
+## 感谢
+
+<img src="https://www.jetbrains.com/shop/static/images/jetbrains-logo-inv.svg" height="100">
+
+感谢由 [Jetbrains](https://www.jetbrains.com) 提供的 [开源许可证书](https://www.jetbrains.com/community/opensource/) 
+
+此项目部分内容通过 [PyCharm](https://www.jetbrains.com/pycharm/) 进行开发.
