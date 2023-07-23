@@ -21,3 +21,13 @@ class Deepin(object):
         from .deepinWallPaperHandler import exec_setting
 
         exec_setting(self.file)
+        # screens = os.popen("xrandr|grep ' connected'")
+        # screens = screens.read().splitlines()
+        # bus = dbus.SessionBus()
+        # appearance = bus.get_object('com.deepin.daemon.Appearance',
+        #                             '/com/deepin/daemon/Appearance')
+        # appearance_interface = dbus.Interface(
+        #     appearance, dbus_interface='com.deepin.daemon.Appearance')
+        # for i in screens:
+        #     screen_name = i.split(" ")[0]
+        #     appearance_interface.SetMonitorBackground(screen_name, self.file)
