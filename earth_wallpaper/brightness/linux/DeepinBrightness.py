@@ -50,14 +50,16 @@ class DeepinBrightness(object):
         obj = bus.get_proxy_object('com.deepin.daemon.Display', '/com/deepin/daemon/Display', introspection)
         appearance_interface = obj.get_interface('com.deepin.daemon.Display')
 
-        sub = run("xrandr|grep 'connected primary'", shell=True, universal_newlines=True, stdout=PIPE, stderr=PIPE,
+        sub = run("xrandr|grep 'connected'", shell=True, universal_newlines=True, stdout=PIPE, stderr=PIPE,
                   encoding='utf-8')
         if sub.returncode == 1:
             logger.error(sub.stderr)
             return
 
-        primary_screen = sub.stdout.splitlines()
-        for i in primary_screen:
+        screens = sub.stdout.splitlines()
+        for i in screens:
+            if i.__contains__('disconnected'):
+                continue
             screen_name = i.split(" ")[0]
             # 原始方法名为SetMonitorBackground 转换为get_wallpaper_slide_show
             await appearance_interface.call_set_brightness(screen_name, brightness)

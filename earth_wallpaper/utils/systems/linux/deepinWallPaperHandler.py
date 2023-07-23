@@ -16,13 +16,15 @@ async def set_deepin_wall_paper(file):
     obj = bus.get_proxy_object('com.deepin.daemon.Appearance', '/com/deepin/daemon/Appearance', introspection)
     appearance_interface = obj.get_interface('com.deepin.daemon.Appearance')
 
-    sub = run("xrandr|grep 'connected primary'", shell=True, universal_newlines=True, stdout=PIPE,stderr=PIPE,encoding='utf-8')
+    sub = run("xrandr|grep ' connected'", shell=True, universal_newlines=True, stdout=PIPE,stderr=PIPE,encoding='utf-8')
     if sub.returncode == 1:
         print(sub.stderr)
         return
 
-    primary_screen = sub.stdout.splitlines()
-    for i in primary_screen:
+    screens = sub.stdout.splitlines()
+    for i in screens:
+        if i.__contains__('disconnected'):
+            continue
         screen_name = i.split(" ")[0]
         # 原始方法名为SetMonitorBackground 转换为get_wallpaper_slide_show
         await appearance_interface.call_set_monitor_background(screen_name, file)
