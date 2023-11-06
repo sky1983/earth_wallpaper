@@ -8,10 +8,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-sunriseBrightness = 0.5
-dayBrightness = 0.8
-sunsetBrightness = 0.6
-nightBrightness = 0.2
+sunriseBrightness = 0.9
+dayBrightness = 1
+sunsetBrightness = 0.8
+nightBrightness = 0.7
 
 
 class DeepinBrightness(object):
